@@ -1,0 +1,60 @@
+{% extends 'base.html' %} {% block header %}
+<h1>{% block title %}Booking Details{% endblock %}</h1>
+{% endblock %} {% block content %}
+<div class="container my-4">
+    <h2>Booking for {{ booking.tour_name }}</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %}
+    <div class="messages">
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %} {% endwith %}
+
+    <div class="card mb-4">
+        <div class="card-header">
+            Booking ID: {{ booking.id }}
+        </div>
+        <div class="card-body">
+            <p><strong>Tour:</strong> {{ booking.tour_name }}</p>
+            <p><strong>Tour Date:</strong> {{ booking.tour_date }}</p>
+            <p><strong>Description:</strong> {{ booking.description }}</p>
+            <p><strong>Number of Participants:</strong> {{ booking.num_participants }}</p>
+            <p><strong>Price per participant:</strong> Ksh{{ "%.2f"|format(booking.price) }}</p>
+            <p><strong>Booking Date:</strong> {{ booking.booking_date }}</p>
+            <p><strong>Payment Status:</strong> {% if booking.payment_status == 'pending' %}
+                <span class="badge bg-warning">Pending</span> {% elif booking.payment_status == 'paid' %}
+                <span class="badge bg-success">Paid</span> {% elif booking.payment_status == 'failed' %}
+                <span class="badge bg-danger">Failed</span> {% else %}
+                <span class="badge bg-secondary">{{ booking.payment_status|capitalize }}</span> {% endif %}
+            </p>
+
+            {% if booking.payment_status == 'paid' %}
+            <p><strong>Amount Paid:</strong> Ksh{{ "%.2f"|format(booking.amount_paid) }}</p>
+            <p><strong>M-Pesa Receipt:</strong> {{ booking.mpesa_receipt }}</p>
+            <p><strong>Paid By Phone:</strong> {{ booking.phone_number_paid }}</p>
+
+            {# ADDED/MODIFIED: Link to PDF Receipt #}
+            <a href="{{ url_for('generate_pdf_receipt', booking_id=booking.id) }}" class="btn btn-primary mt-3" target="_blank">Print Receipt</a>
+
+            <a href="{{ url_for('my_bookings') }}" class="btn btn-secondary mt-3">Back to My Bookings</a> {% else %} {% set total_amount = booking.price * booking.num_participants %}
+            <h4 class="mt-4">Total Amount Due: <span class="text-success">Ksh{{ "%.2f"|format(total_amount) }}</span></h4>
+
+            <div class="mt-4">
+                <h5>Initiate M-Pesa Payment</h5>
+                <form method="POST" action="{{ url_for('initiate_mpesa_payment', booking_id=booking.id) }}">
+                    <div class="mb-3">
+                        <label for="phone_number" class="form-label">M-Pesa Phone Number</label>
+                        <input type="tel" class="form-control" id="phone_number" name="phone_number" placeholder="e.g., 0712345678 or 254712345678" required pattern="^(0|254)\d{9}$">
+                        <div class="form-text">Enter the Safaricom number you want the STK Push to be sent to.</div>
+                    </div>
+                    <button type="submit" class="btn btn-success">Pay with M-Pesa</button>
+                    <a href="{{ url_for('my_bookings') }}" class="btn btn-secondary">Cancel and Go Back</a>
+                </form>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

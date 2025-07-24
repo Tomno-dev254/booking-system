@@ -1,0 +1,25 @@
+{% extends 'base.html' %} {% block title %}Tour Memories{% endblock %} {% block content %}
+<h2 class="mb-4">Tour Memories & Gallery</h2>
+{% if memories %}
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    {% for memory in memories %}
+    <div class="col">
+        <div class="card h-100 shadow-sm">
+            {% if memory.image_filename %}
+            <img src="{{ url_for('static', filename='images/' + memory.image_filename) }}" class="card-img-top" alt="{{ memory.title }}"> {% else %}
+            <img src="{{ url_for('static', filename='images/placeholder.jpg') }}" class="card-img-top" alt="No image available"> {# Placeholder if no image #} {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ memory.title }}</h5>
+                <p class="card-text text-muted">{{ memory.description }}</p>
+                <p class="card-text"><small class="text-muted">Date: {{ memory.memory_date }}</small></p>
+                {% if memory.tour_name %}
+                <p class="card-text"><small class="text-muted">From Tour: {{ memory.tour_name }}</small></p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p class="alert alert-info">No memories to display yet. Check back soon!</p>
+{% endif %} {% endblock %}

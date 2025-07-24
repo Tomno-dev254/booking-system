@@ -1,0 +1,46 @@
+{% extends 'base.html' %} {% block header %}
+<h1>{% block title %}My Bookings{% endblock %}</h1>
+{% endblock %} {% block content %}
+<div class="container my-4">
+    <h2>Your Tour Bookings</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %}
+    <div class="messages">
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %} {% endwith %} {% if bookings %}
+    <div class="row">
+        {% for booking in bookings %}
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header">
+                    Booking ID: {{ booking.id }}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ booking.tour_name }}</h5>
+                    <p class="card-text"><strong>Tour Date:</strong> {{ booking.tour_date }}</p>
+                    <p class="card-text"><strong>Participants:</strong> {{ booking.num_participants }}</p>
+                    <p class="card-text"><strong>Total Cost:</strong> ${{ "%.2f"|format(booking.tour_price * booking.num_participants) }}</p>
+                    <p class="card-text"><strong>Booking Date:</strong> {{ booking.booking_date }}</p>
+                    <p class="card-text"><strong>Payment Status:</strong> {% if booking.payment_status == 'pending' %}
+                        <span class="badge bg-warning">Pending Payment</span> {% elif booking.payment_status == 'paid' %}
+                        <span class="badge bg-success">Paid</span> {% elif booking.payment_status == 'failed' %}
+                        <span class="badge bg-danger">Failed</span> {% else %}
+                        <span class="badge bg-secondary">{{ booking.payment_status|capitalize }}</span> {% endif %}
+                    </p>
+                    <hr>
+                    <a href="{{ url_for('booking_details', booking_id=booking.id) }}" class="btn btn-info btn-sm">View Details</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-info" role="alert">
+        You haven't made any bookings yet.
+    </div>
+    <a href="{{ url_for('tours') }}" class="btn btn-primary">Start Booking Now!</a> {% endif %}
+</div>
+{% endblock %}

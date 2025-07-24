@@ -1,0 +1,983 @@
+/* Custom CSS for Tour Booking System (overrides or adds to Bootstrap) */
+
+
+/* ========================================================================= */
+
+
+/* 1. Global Color Palette (CSS Variables)                                 */
+
+
+/* These variables make it easy to change your theme colors.            */
+
+
+/* ========================================================================= */
+
+:root {
+    /* Main Theme Colors */
+    --primary-color: #007bff;
+    /* For main buttons, links, highlights (Bootstrap's primary) */
+    --secondary-color: #6c757d;
+    /* Muted grey for secondary actions/text */
+    --accent-color: #28a745;
+    /* Success/Positive actions (Bootstrap's success) */
+    --warning-color: #ffc107;
+    /* Warnings/Attention (Bootstrap's warning) */
+    --danger-color: #dc3545;
+    /* Errors/Delete actions (Bootstrap's danger) */
+    --info-color: #17a2b8;
+    /* Informational messages (Bootstrap's info) */
+    /* Backgrounds & Text */
+    --light-bg: #f8f9fa;
+    /* General light background */
+    --dark-bg: #343a40;
+    /* Dark backgrounds for headers/footers */
+    --text-dark: #333;
+    /* Default dark text color */
+    --text-light: #fff;
+    /* Default light text color */
+    --border-color: #dee2e6;
+    /* Standard border color */
+    /* Admin Panel Specific Colors (can override above if needed) */
+    --admin-primary: #0056b3;
+    /* A slightly deeper blue for admin elements */
+    --admin-secondary: #495057;
+    /* Darker grey for admin */
+    --admin-dark: #212529;
+    /* Very dark for admin header/footer */
+    --admin-light: #e9ecef;
+    /* Light grey for admin content area background */
+}
+
+
+/* ========================================================================= */
+
+
+/* 2. General Body & Layout (Applies to base.html and all pages)           */
+
+
+/* Overrides original body styles from your style.css and base_admin.html. */
+
+
+/* ========================================================================= */
+
+body {
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: var(--light-bg);
+    /* Default light background for public pages */
+    color: var(--text-dark);
+    /* Default text color */
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-image: none;
+    /* Ensure no conflicting background images by default */
+    background-size: auto;
+    background-repeat: initial;
+    background-attachment: initial;
+    background-position: initial;
+    display: flex;
+    flex-direction: column;
+    /* For sticky footer */
+}
+
+
+/* Main content container */
+
+main.container {
+    flex: 1;
+    /* Ensures content pushes footer to the bottom */
+    background-color: var(--text-light);
+    /* White background for main content area */
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+
+/* Flash messages */
+
+.flashes .alert {
+    margin-top: 1rem;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    font-weight: 500;
+}
+
+
+/* ========================================================================= */
+
+
+/* 3. Header & Navigation (for public-facing site, from base.html)         */
+
+
+/* ========================================================================= */
+
+header.bg-dark {
+    background-color: var(--dark-bg) !important;
+    /* Ensure dark background */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--text-light);
+}
+
+.navbar-nav .nav-link {
+    color: rgba(10, 10, 10, 0.75);
+    /* Lighter white for links */
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+    color: var(--text-light);
+    /* Pure white on hover/active */
+}
+
+
+/* Dropdown menu styling */
+
+.navbar-nav .dropdown-menu {
+    background-color: var(--dark-bg);
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-nav .dropdown-item {
+    color: rgba(255, 255, 255, 0.75);
+    background-color: transparent;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar-nav .dropdown-item:hover {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+}
+
+
+/* ========================================================================= */
+
+
+/* 4. Footer Styling (from base.html)                                      */
+
+
+/* ========================================================================= */
+
+footer {
+    background-color: var(--dark-bg);
+    color: #bbb;
+    /* Lighter text for footer */
+    padding: 40px 0 20px;
+    /* More padding top/bottom */
+    font-size: 0.9em;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
+    /* Subtle shadow above footer */
+    margin-top: auto;
+    /* Push footer to the bottom */
+}
+
+footer h4 {
+    color: var(--text-light);
+    /* White headings */
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+footer .list-unstyled li {
+    margin-bottom: 8px;
+}
+
+footer .list-unstyled a {
+    color: #999;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer .list-unstyled a:hover {
+    color: var(--primary-color);
+    /* Primary color on hover */
+}
+
+footer .footer-divider {
+    border-color: rgba(255, 255, 255, 0.1);
+    /* Lighter divider */
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+footer .social-icons a {
+    color: var(--text-light);
+    font-size: 1.5em;
+    margin-right: 15px;
+    transition: color 0.3s ease;
+}
+
+footer .social-icons a:hover {
+    color: var(--primary-color);
+}
+
+
+/* ========================================================================= */
+
+
+/* 5. Admin Panel Specific Styling (from base_admin.html & admin files)    */
+
+
+/* These styles override general ones for the admin section.            */
+
+
+/* ========================================================================= */
+
+
+/* Admin Header */
+
+.admin-header {
+    background-color: var(--admin-dark);
+    /* Dark background for admin header */
+    color: white;
+    padding: 15px 30px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    /* Ensure flex for alignment */
+    justify-content: space-between;
+    align-items: center;
+}
+
+.admin-header h1 {
+    margin: 0;
+    /* Remove default margin for heading */
+    color: white;
+}
+
+
+/* Admin Navigation */
+
+.admin-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.admin-nav li {
+    margin-left: 20px;
+}
+
+.admin-nav a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.admin-nav a:hover {
+    background-color: var(--admin-primary);
+    /* Primary blue on hover */
+    color: white;
+}
+
+
+/* Admin Content Area */
+
+.admin-content {
+    background-color: white;
+    /* White background for admin content block */
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+
+/* Admin Footer (re-use general footer if applicable or define specific) */
+
+
+/* If you want the admin footer to be distinct, define it here: */
+
+
+/*
+.admin-footer {
+    text-align: center;
+    padding: 20px;
+    background-color: var(--admin-dark);
+    color: #bbb;
+    font-size: 0.9em;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.05);
+}
+*/
+
+
+/* ========================================================================= */
+
+
+/* 6. Card Customizations (for both public and admin pages)                */
+
+
+/* ========================================================================= */
+
+.card {
+    border: none;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    /* Ensures image corners are rounded with the card */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    /* More prominent shadow */
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    height: 100%;
+    /* For consistent heights in card grids */
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    /* Lift effect on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    /* Stronger shadow on hover */
+}
+
+.card-img-top {
+    height: 200px;
+    /* Fixed height for consistent image size */
+    object-fit: cover;
+    /* Ensures images cover the area without distortion */
+    border-top-left-radius: 0.75rem;
+    /* Match card radius */
+    border-top-right-radius: 0.75rem;
+    /* Match card radius */
+}
+
+.card-header {
+    font-weight: 600;
+    font-size: 1.1em;
+    padding: 0.8rem 1.25rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    /* Subtle white border for light backgrounds */
+    background-color: inherit;
+    /* Inherit background from card for consistent coloring */
+    color: inherit;
+    /* Inherit text color from card */
+}
+
+.card-body h5.card-title {
+    font-size: 2.5rem;
+    /* Larger number for dashboard cards */
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+
+/* For public tour cards */
+
+.card-body h5:not(.card-title) {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    /* Adjust for specific card types if needed */
+}
+
+.card-body p.card-text {
+    font-size: 0.95rem;
+    opacity: 0.9;
+}
+
+
+/* Customizing Bootstrap background colors for cards for better contrast/feel */
+
+.card.bg-primary {
+    background-color: var(--primary-color) !important;
+}
+
+.card.bg-success {
+    background-color: var(--accent-color) !important;
+}
+
+.card.bg-info {
+    background-color: var(--info-color) !important;
+}
+
+.card.bg-warning {
+    background-color: var(--warning-color) !important;
+}
+
+.card.bg-danger {
+    background-color: var(--danger-color) !important;
+}
+
+.card.bg-dark {
+    background-color: var(--dark-bg) !important;
+}
+
+.card.bg-secondary {
+    background-color: var(--secondary-color) !important;
+}
+
+
+/* Ensure text on these colored cards remains white/dark as appropriate */
+
+.card.text-white .card-header,
+.card.text-white .card-title,
+.card.text-white .card-text,
+.card.text-white .list-group-item {
+    color: white !important;
+}
+
+.card.text-dark .card-header,
+.card.text-dark .card-title,
+.card.text-dark .card-text,
+.card.text-dark .list-group-item {
+    color: var(--text-dark) !important;
+}
+
+
+/* Specific card styles for public tours (e.g., in tours.html) */
+
+.tour-card .card-footer {
+    background-color: var(--light-bg);
+    border-top: 1px solid var(--border-color);
+}
+
+
+/* ========================================================================= */
+
+
+/* 7. Table Styling                                                        */
+
+
+/* ========================================================================= */
+
+.table {
+    --bs-table-bg: #fff;
+    /* Ensure white background for striped rows */
+    --bs-table-striped-bg: var(--light-bg);
+    /* Lighter stripe background */
+    --bs-table-hover-bg: #e9ecef;
+    /* Light grey hover */
+    border-collapse: separate;
+    /* Allow border-radius */
+    border-spacing: 0;
+    /* Remove space between cells */
+    border-radius: 8px;
+    /* Rounded corners for the entire table */
+    overflow: hidden;
+    /* Ensures rounded corners clip content */
+    margin-top: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    /* Subtle shadow */
+}
+
+.table thead th {
+    background-color: var(--admin-primary);
+    /* Primary color for header (can use --primary-color too) */
+    color: white;
+    border-bottom: none;
+    /* Remove default border */
+    padding: 12px 15px;
+    /* More padding */
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9em;
+}
+
+.table tbody tr {
+    transition: background-color 0.2s ease-in-out;
+}
+
+.table tbody tr:last-child td {
+    border-bottom: none;
+    /* Remove border from last row cells */
+}
+
+.table td,
+.table th {
+    padding: 10px 15px;
+    vertical-align: middle;
+    border-color: var(--border-color);
+    /* Lighter border color */
+}
+
+
+/* Responsive Table Improvement */
+
+.table-responsive {
+    border-radius: 8px;
+    /* Apply rounded corners to the wrapper too */
+    overflow-x: auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    /* Consistent shadow */
+}
+
+
+/* ========================================================================= */
+
+
+/* 8. Form Spacing and Alignment                                           */
+
+
+/* ========================================================================= */
+
+.card-body form,
+.modal-body form {
+    padding: 15px;
+    /* Add some internal padding to form within card/modal */
+}
+
+.mb-3 {
+    margin-bottom: 1rem !important;
+    /* Ensure consistent margin-bottom for form groups */
+}
+
+.form-label {
+    font-weight: 600;
+    /* Make labels slightly bolder */
+    margin-bottom: 0.5rem;
+    /* Space between label and input */
+    color: var(--text-dark);
+    /* Darker label color */
+}
+
+.form-control,
+.form-select,
+.form-control[type="file"] {
+    border-radius: 0.4rem;
+    /* Slightly more rounded inputs */
+    border: 1px solid #ced4da;
+    /* Consistent border */
+    padding: 0.6rem 0.75rem;
+    /* Slightly more padding inside inputs */
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03);
+    /* Subtle inner shadow */
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
+    /* Bootstrap focus color with transparency */
+}
+
+
+/* Styles for collapse sections (e.g., Add New Tour/Memory) */
+
+.collapse.show {
+    border: 1px solid #e9ecef;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+    background-color: #fcfcfc;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+
+/* Modal Form Specifics */
+
+.modal-content {
+    border-radius: 0.75rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.modal-header {
+    background-color: var(--primary-color);
+    /* Primary color for modal header */
+    color: white;
+    border-bottom: none;
+    border-top-left-radius: 0.75rem;
+    border-top-right-radius: 0.75rem;
+    padding: 1rem 1.5rem;
+}
+
+.modal-title {
+    font-weight: 600;
+}
+
+.btn-close {
+    filter: invert(1) brightness(2);
+    /* Make close button white on dark header */
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.modal-footer {
+    border-top: 1px solid #e9ecef;
+    padding: 1rem 1.5rem;
+}
+
+
+/* ========================================================================= */
+
+
+/* 9. Badge Customization                                                  */
+
+
+/* ========================================================================= */
+
+.badge {
+    padding: 0.4em 0.7em;
+    border-radius: 0.35rem;
+    font-weight: 600;
+    font-size: 0.8em;
+    text-transform: capitalize;
+    vertical-align: middle;
+    /* Align badges nicely with text */
+}
+
+
+/* Override Bootstrap badge colors with custom variables */
+
+.badge.bg-success {
+    background-color: var(--accent-color) !important;
+    color: white !important;
+}
+
+.badge.bg-info {
+    background-color: var(--info-color) !important;
+    color: white !important;
+}
+
+.badge.bg-warning {
+    background-color: var(--warning-color) !important;
+    color: #333 !important;
+}
+
+.badge.bg-danger {
+    background-color: var(--danger-color) !important;
+    color: white !important;
+}
+
+.badge.bg-secondary {
+    background-color: var(--secondary-color) !important;
+    color: white !important;
+}
+
+.badge.bg-primary {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+}
+
+.badge.bg-dark {
+    background-color: var(--dark-bg) !important;
+    color: white !important;
+}
+
+
+/* ========================================================================= */
+
+
+/* 10. Button Hover Effects & Consistency                                  */
+
+
+/* ========================================================================= */
+
+.btn {
+    transition: all 0.2s ease-in-out;
+    border-radius: 0.35rem;
+    font-weight: 500;
+    padding: 0.6rem 1.2rem;
+}
+
+
+/* Primary Button */
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: #0056b3 !important;
+    /* Darker shade of primary */
+    border-color: #0056b3 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Success Button */
+
+.btn-success {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.btn-success:hover {
+    background-color: #1e7e34 !important;
+    /* Darker shade of accent */
+    border-color: #1e7e34 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Warning Button */
+
+.btn-warning {
+    background-color: var(--warning-color);
+    border-color: var(--warning-color);
+    color: #333;
+    /* Ensure dark text on warning */
+}
+
+.btn-warning:hover {
+    background-color: #e0a800 !important;
+    /* Darker shade of warning */
+    border-color: #e0a800 !important;
+    color: #333 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Danger Button */
+
+.btn-danger {
+    background-color: var(--danger-color);
+    border-color: var(--danger-color);
+}
+
+.btn-danger:hover {
+    background-color: #bd2130 !important;
+    /* Darker shade of danger */
+    border-color: #bd2130 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Info Button */
+
+.btn-info {
+    background-color: var(--info-color);
+    border-color: var(--info-color);
+}
+
+.btn-info:hover {
+    background-color: #117a8b !important;
+    /* Darker shade of info */
+    border-color: #117a8b !important;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Outline Buttons (e.g., promote/demote user, delete user) */
+
+.btn-outline-primary,
+.btn-outline-success,
+.btn-outline-warning,
+.btn-outline-danger,
+.btn-outline-secondary {
+    transition: all 0.2s ease-in-out;
+    font-weight: 500;
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.btn-outline-success:hover {
+    background-color: var(--accent-color) !important;
+    color: white !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.btn-outline-warning:hover {
+    background-color: var(--warning-color) !important;
+    color: #333 !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.btn-outline-danger:hover {
+    background-color: var(--danger-color) !important;
+    color: white !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.btn-outline-secondary:hover {
+    background-color: var(--secondary-color) !important;
+    color: white !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+/* ========================================================================= */
+
+
+/* 11. Specific Page Adjustments (based on common patterns)                */
+
+
+/* ========================================================================= */
+
+
+/* Jumbotron (for index.html) */
+
+.jumbotron {
+    background-color: var(--light-bg) !important;
+    color: var(--text-dark);
+    padding: 3rem 2rem;
+    /* Adjusted padding */
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.jumbotron h2 {
+    color: var(--primary-color);
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.jumbotron .lead {
+    font-size: 1.25rem;
+}
+
+
+/* Booking Details Page (booking_details.html) - Card-like structure */
+
+.booking-details-card .card-header {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 600;
+}
+
+
+/* Login/Register Page (login.html, register.html) - Centered forms */
+
+.container.mt-5 .card {
+    max-width: 500px;
+    margin: auto;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Spinner containers */
+
+.spinner-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Center the spinner if it's the only content */
+    margin-top: 1rem;
+    color: var(--primary-color);
+    /* Color the spinner */
+}
+
+
+/* ========================================================================= */
+
+
+/* 12. Responsive Adjustments (General)                                    */
+
+
+/* ========================================================================= */
+
+@media (max-width: 767.98px) {
+    /* For small devices (Bootstrap md breakpoint) */
+    /* General content padding reduction */
+    main.container {
+        padding: 1rem;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    /* Admin header/nav stacking */
+    .admin-header {
+        flex-direction: column;
+        text-align: center;
+        padding: 15px;
+    }
+    .admin-nav ul {
+        flex-direction: column;
+        margin-top: 10px;
+    }
+    .admin-nav li {
+        margin-left: 0;
+        margin-bottom: 5px;
+    }
+    .admin-nav a {
+        display: block;
+    }
+    .admin-content {
+        padding: 15px;
+        margin: 15px auto;
+    }
+    /* Dashboard cards stack on extra small screens */
+    .row-cols-1.row-cols-md-2.row-cols-lg-3 .col {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    /* Adjust padding for table cells on small screens */
+    .table td,
+    .table th {
+        padding: 8px 10px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    /* Extra small devices (Bootstrap sm breakpoint) */
+    .card-body h5.card-title {
+        font-size: 2rem;
+        /* Smaller dashboard numbers on very small screens */
+    }
+}
+
+
+/* Add this to your static/css/style.css file */
+
+.hero-section {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.pinimg.com/1200x/f7/0c/06/f70c063dba1fd26483489b12add25e09.jpg');
+    /* Add your image path here */
+    background-size: cover;
+    background-position: center center;
+    color: #fff;
+    /* Ensures text is white */
+    padding: 80px 20px;
+    /* Adjust padding as needed for height */
+    min-height: 400px;
+    /* Ensure enough height to see the image */
+    display: flex;
+    /* Use flexbox for centering content */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    /* Adds shadow to text for readability */
+}
+
+.hero-section h2,
+.hero-section p,
+.hero-section .lead {
+    color: inherit;
+    /* Ensure text color is inherited from parent (white) */
+}
+
+
+/* Optional: Adjust button style if needed for contrast against the image */
+
+.hero-section .btn-primary {
+    background-color: #007bff;
+    /* Bootstrap primary blue */
+    border-color: #007bff;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.hero-section .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}
+
+
+/* If you want the horizontal rule (hr) to be lighter on the dark background */
+
+.hero-section hr.my-4 {
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    /* Lighter border for contrast */
+}

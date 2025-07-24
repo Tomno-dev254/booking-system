@@ -1,0 +1,22 @@
+{% extends 'base.html' %} {% block header %}
+<h1>{% block title %}Booking Confirmed!{% endblock %}</h1>
+{% endblock %} {% block content %}
+<div class="container my-4">
+    <div class="alert alert-success text-center" role="alert">
+        <h4 class="alert-heading">Congratulations, {{ customer_name }}!</h4>
+        <p>Your booking for the <strong>{{ tour_name }}</strong> tour has been successfully confirmed!</p>
+        <p>We're thrilled to have you join us. Get ready for an amazing experience!</p>
+        <hr>
+        <p class="mb-0">You have booked for <strong>{{ num_participants }} participant(s)</strong>.</p>
+        <p class="mb-0">A confirmation email has been sent to your registered email address.</p>
+    </div>
+
+    <div class="text-center mt-4">
+        {# Add the Print Confirmation button here #}
+        <button class="btn btn-info btn-lg me-3" onclick="window.print()">Print Confirmation</button>
+
+        <a href="{{ url_for('my_bookings') }}" class="btn btn-primary btn-lg me-3">View My Bookings</a>
+        <a href="{{ url_for('tours') }}" class="btn btn-secondary btn-lg">Explore More Tours</a>
+    </div>
+</div>
+{% endblock %}

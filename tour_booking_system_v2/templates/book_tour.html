@@ -1,0 +1,20 @@
+{% extends 'base.html' %} {% block title %}Book {{ tour.name }}{% endblock %} {% block head_extra %}
+<script src="https://js.stripe.com/v3/"></script>
+{% endblock %} {% block content %}
+<h2 class="mb-3">Book Tour: {{ tour.name }}</h2>
+<p class="lead">{{ tour.description }}</p>
+<ul class="list-group list-group-flush mb-4">
+    <li class="list-group-item"><strong>Price:</strong> Kes{{ "%.2f" | format(tour.price) }}</li>
+    <li class="list-group-item"><strong>Date:</strong> {{ tour.date }}</li>
+    <li class="list-group-item"><strong>Spots Available:</strong> {{ tour.max_participants - tour.current_participants }} / {{ tour.max_participants }}</li>
+</ul>
+
+<form method="POST" id="booking-form">
+    <div class="mb-3">
+        <label for="num_participants" class="form-label">Number of Participants:</label>
+        <input type="number" class="form-control" id="num_participants" name="num_participants" min="1" value="1" required>
+    </div>
+
+    <button type="submit" class="btn btn-success btn-lg" id="submit-button">Proceed to Payment</button>
+</form>
+{% endblock %}

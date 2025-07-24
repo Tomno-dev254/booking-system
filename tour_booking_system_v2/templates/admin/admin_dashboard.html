@@ -1,0 +1,60 @@
+{% extends 'base.html' %} {% block title %}Admin Dashboard{% endblock %} {% block content %}
+<h2 class="mb-4">Admin Dashboard</h2>
+
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-4">
+    <div class="col">
+        <div class="card text-white bg-primary mb-3 h-100">
+            <div class="card-header">Total Tours</div>
+            <div class="card-body">
+                <h5 class="card-title">{{ total_tours }}</h5>
+                <p class="card-text">Number of tours in the system.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card text-white bg-success mb-3 h-100">
+            <div class="card-header">Total Users</div>
+            <div class="card-body">
+                <h5 class="card-title">{{ total_users }}</h5>
+                <p class="card-text">Registered users on the platform.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card text-white bg-info mb-3 h-100">
+            <div class="card-header">Total Bookings</div>
+            <div class="card-body">
+                <h5 class="card-title">{{ total_bookings }}</h5>
+                <p class="card-text">Overall number of bookings made.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card text-white bg-warning mb-3 h-100">
+            <div class="card-header">Paid Bookings</div>
+            <div class="card-body">
+                <h5 class="card-title">{{ paid_bookings }}</h5>
+                <p class="card-text">Bookings with 'paid' status.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card text-white bg-danger mb-3 h-100">
+            <div class="card-header">Pending Bookings</div>
+            <div class="card-body">
+                <h5 class="card-title">{{ pending_bookings }}</h5>
+                <p class="card-text">Bookings with 'pending' status.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h3 class="mb-3">Admin Navigation</h3>
+<div class="list-group">
+    <a href="{{ url_for('manage_tours') }}" class="list-group-item list-group-item-action">Manage Tours (Add/Edit/Delete)</a>
+    <a href="{{ url_for('manage_users') }}" class="list-group-item list-group-item-action">Manage Users</a>
+    <a href="{{ url_for('view_bookings') }}" class="list-group-item list-group-item-action">View All Bookings</a>
+    <a href="{{ url_for('manage_memories') }}" class="list-group-item list-group-item-action">Manage Memories</a>
+</div>
+
+{% endblock %}

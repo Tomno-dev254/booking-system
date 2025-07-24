@@ -1,0 +1,23 @@
+{% extends 'base.html' %} {% block title %}Our Past Tours{% endblock %} {% block content %}
+<h2 class="mb-4">Memories from Our Past Tours</h2>
+{% if tours %}
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    {% for tour in tours %}
+    <div class="col">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title text-success">{{ tour.name }}</h5>
+                <p class="card-text text-muted">{{ tour.description }}</p>
+                <p class="card-text"><strong>Date:</strong> {{ tour.date }}</p>
+                <p class="card-text"><span class="badge bg-dark">Tour Completed</span></p>
+            </div>
+            <div class="card-footer bg-transparent border-top-0 d-grid">
+                <a href="{{ url_for('memories') }}" class="btn btn-outline-secondary btn-sm">View Related Memories</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p class="alert alert-info">No completed tours to display yet.</p>
+{% endif %} {% endblock %}

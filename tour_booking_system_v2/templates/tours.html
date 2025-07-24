@@ -1,0 +1,33 @@
+{% extends 'base.html' %} {% block title %}Available Tours{% endblock %} {% block content %}
+<h2 class="mb-4">Available Tours</h2>
+{% if tours %}
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    {% for tour in tours %}
+    <div class="col">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title text-primary">{{ tour.name }}</h5>
+                <p class="card-text text-muted">{{ tour.description }}</p>
+                <p class="card-text"><strong>Price:</strong>
+                    <p>Price: KSh {{ '%.2f' | format(tour.price) }}</p>
+                </p>
+                <p class="card-text"><strong>Date:</strong> {{ tour.date }}</p>
+                <p class="card-text">
+                    <strong>Spots Available:</strong> {% set available_spots = tour.max_participants - tour.current_participants %} {% if available_spots > 5 %}
+                    <span class="badge bg-success">{{ available_spots }} / {{ tour.max_participants }}</span> {% elif available_spots > 0 %}
+                    <span class="badge bg-warning text-dark">{{ available_spots }} / {{ tour.max_participants }}</span> {% else %}
+                    <span class="badge bg-danger">0 / {{ tour.max_participants }}</span> {% endif %}
+                </p>
+            </div>
+            <div class="card-footer bg-transparent border-top-0 d-grid">
+                {% if available_spots > 0 %}
+                <a href="{{ url_for('book_tour', tour_id=tour.id) }}" class="btn btn-primary">Book Now</a> {% else %}
+                <span class="badge bg-danger p-2">Fully Booked</span> {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p class="alert alert-info">No tours available at the moment. Please check back later!</p>
+{% endif %} {% endblock %}

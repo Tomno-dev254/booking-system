@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Admin Panel{% endblock %} - Tour Booking System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        /* Add some basic admin panel specific styling here or in style.css */
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        
+        .admin-header {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .admin-header h1 {
+            margin: 0;
+        }
+        
+        .admin-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+        
+        .admin-nav li {
+            margin-left: 20px;
+        }
+        
+        .admin-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .admin-nav a:hover {
+            background-color: #555;
+        }
+        
+        .admin-content {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .flash {
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+        
+        .flash.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .flash.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .flash.warning {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+        }
+        
+        .flash.info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        /* Admin table styling */
+        
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .admin-table th,
+        .admin-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        .admin-table th {
+            background-color: #f2f2f2;
+        }
+        
+        .admin-actions a,
+        .admin-actions button {
+            display: inline-block;
+            padding: 5px 10px;
+            margin-right: 5px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+            font-size: 0.9em;
+        }
+        
+        .admin-actions a.edit,
+        .admin-actions button.edit {
+            background-color: #007bff;
+        }
+        
+        .admin-actions a.delete,
+        .admin-actions button.delete {
+            background-color: #dc3545;
+        }
+        
+        .admin-actions a.toggle,
+        .admin-actions button.toggle {
+            background-color: #ffc107;
+            color: black;
+        }
+        /* Warning/Info color */
+    </style>
+    {% block head %}{% endblock %}
+</head>
+
+<body>
+    <header class="admin-header">
+        <h1>Tour Booking Admin</h1>
+        <nav class="admin-nav">
+            <ul>
+                <li><a href="{{ url_for('admin_dashboard') }}">Dashboard</a></li>
+                <li><a href="{{ url_for('manage_tours') }}">Tours</a></li>
+                <li><a href="{{ url_for('manage_users') }}">Users</a></li>
+                <li><a href="{{ url_for('view_bookings') }}">Bookings</a></li>
+                <li><a href="{{ url_for('manage_memories') }}">Memories</a></li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="admin-content">
+        {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} {% for category, message in messages %}
+        <div class="flash {{ category }}">{{ message }}</div>
+        {% endfor %} {% endif %} {% endwith %} {% block content %}{% endblock %}
+    </div>
+
+    <footer>
+        <p>&copy; {{ datetime.now().year }} Tour Booking Admin. All rights reserved.</p>
+    </footer>
+    {% block scripts %}{% endblock %}
+</body>
+
+</html>

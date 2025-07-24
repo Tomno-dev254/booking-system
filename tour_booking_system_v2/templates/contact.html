@@ -1,0 +1,47 @@
+{% extends 'base.html' %} {% block title %}Contact Us{% endblock %} {% block content %}
+<h2 class="mb-3">Contact Us</h2>
+<p class="lead">Have questions or need assistance? Feel free to reach out to us!</p>
+
+<div class="row">
+    <div class="col-md-6 mb-4">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title text-primary">General Inquiries</h5>
+                <p class="card-text">Email: <a href="mailto:info@yourtourbookings.com">info@yourtourbookings.com</a></p>
+                <p class="card-text">Phone: +1 (123) 456-7890</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 mb-4">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title text-primary">Customer Support</h5>
+                <p class="card-text">Email: <a href="mailto:support@yourtourbookings.com">support@yourtourbookings.com</a></p>
+                <p class="card-text">Operating Hours: Monday - Friday, 9 AM - 5 PM (PST)</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h3 class="mt-4">Send Us a Message</h3>
+<p>While we don't have a live contact form in this example, you can email us directly using the addresses above.</p>
+<form>
+    <div class="mb-3">
+        <label for="name" class="form-label">Your Name</label>
+        <input type="text" class="form-control" id="name" placeholder="John Doe" disabled>
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Your Email</label>
+        <input type="email" class="form-control" id="email" placeholder="name@example.com" disabled>
+    </div>
+    <div class="mb-3">
+        <label for="subject" class="form-label">Subject</label>
+        <input type="text" class="form-control" id="subject" placeholder="Question about a tour" disabled>
+    </div>
+    <div class="mb-3">
+        <label for="message" class="form-label">Message</label>
+        <textarea class="form-control" id="message" rows="5" disabled>Please use the email addresses above to contact us directly.</textarea>
+    </div>
+    <button type="submit" class="btn btn-primary" disabled>Send Message</button>
+</form>
+{% endblock %}
