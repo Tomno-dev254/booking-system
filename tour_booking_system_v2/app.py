@@ -12,6 +12,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 from dotenv import load_dotenv
+from yourmodule import create_app 
 
 # Flask-Mail (Keep this as you're using it for emails)
 from flask_mail import Mail, Message
@@ -847,6 +848,7 @@ def create_app():
 
     return app
 
+app = create_app()  # Make this global so Gunicorn can access it
+
 if __name__ == '__main__':
-    app = create_app()
     app.run(debug=True)
