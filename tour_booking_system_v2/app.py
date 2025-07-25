@@ -17,7 +17,8 @@ from dotenv import load_dotenv
 from flask_mail import Mail, Message
 
 # Import database functions (assuming database.py handles get_db, close_db, init_app)
-from database import get_db, close_db, init_app
+from .database import get_db, close_db, init_app
+
 
 # Load environment variables from .env file (must be at the top)
 load_dotenv()
