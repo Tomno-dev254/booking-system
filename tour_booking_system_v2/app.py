@@ -848,7 +848,9 @@ def create_app():
 
     return app
 
-app = create_app()  # Make this global so Gunicorn can access it
+from tour_booking_system_v2 import create_app  # or tour_booking_system_v2.factory
+
+app = create_app()
 
 if __name__ == '__main__':
     app.run(debug=True)
